@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Encurtador de Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+<h1>EncurtaCu 🔗</h1>
+<form th:action="@{/encurtar}" method="post" class="d-flex mb-3">
+    <input type="text" name="urlLong" class="form-control me-2" placeholder="Cole sua URL aqui" required>
+    <button type="submit" class="btn btn-primary">Encurtar</button>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Original</th>
+        <th>Encurtada</th>
+        <th>Data</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="link : ${links}">
+        <td th:text="${link.urlLong}"></td>
+        <td><a th:href="${link.urlEncurtada}" th:text="${link.urlEncurtada}" target="_blank"></a></td>
+        <td th:text="${#temporals.format(link.urlCriadaEm, 'dd/MM/yyyy HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
